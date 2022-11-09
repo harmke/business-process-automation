@@ -1,4 +1,4 @@
-# Business Process Automation Accelerator
+# Workshop instructions
 
 
 ## Overview
@@ -18,9 +18,7 @@ And, optionally, the end-user can add a Cognitive Search Index, indexing each th
 
 ## Contents  
 - [Overview](#overview)  
-- [Architecture](#architecture)  
-- [Sample Pipeline](#sample-pipeline)  
-- [Currently Inluded Algorithms](#currently-included-algorithms)  
+- [Architecture](#architecture)
 - [Prerequisities](#prerequisities)  
 - [Installation Steps](#installation-steps)  
   - [Create a Resource Group](#1-create-a-resource-group-in-your-azure-portal)
@@ -31,11 +29,8 @@ And, optionally, the end-user can add a Cognitive Search Index, indexing each th
   - [Create action to deploy](#6-collect-the-published-profiles-from-your-newly-created-azure-function-apps)
   - [Create GitHub Action to build the code and deploy it to your Function Apps](#6-create-github-action-to-your-function-apps-deploying-your-front-and-back-end-resources)
 - [Go to your React App](#go-to-your-react-app)
-- [Load Documents!](#load-documents)
+- [Create Pipeline **TODO: add detailed instructions in this section**](#create-pipeline)
 - [View Your Results](#view-your-results)
-- [Further Customization](#further-customization)
-- [Contacts](#contacts)  
-- [Roadmap](#roadmap)
 - [References](#references)  
 ---
 
@@ -58,89 +53,6 @@ The UI provides and drag-n-drop interface for end users to build multi-service p
 ![](images/overview.png)  
 *BPA UI*
 <br/><br/>  
-
-## Sample Pipeline  
-A simple example pipeline for a call center mining use case is below is illustrated below. For a general call center mining use case, the Business Process Accelerator could be used to deploy a pipeline ingesting, transcribing, (+optionally translating), summarizing, and analyzing the sentiment for each call.
-Resulting Pipeline Steps [AI Service Deployed]:  
-
-1.	Transcribe audio calls [Speech Service]  
-2.	Translate to another language (optional) [Speech Service]  
-3.	Store the transcribed and translated calls [CosmosDB]  
-4.	Apply suite of text analytics offerings (e.g. text summarization, sentiment analysis, call classification) [Language Service]  
-
-The resulting deployment pipeline leverages: 
-Azure Speech Service, Azure Language Service, Azure Cosmos DB, Azure Functions
-<br/><br/>
-![](images/sample_pipeline_call_center_mining.png)  
-*Sample BPA pipeline for call center mining*   
-
-Once the pipeline is completed – this process typically takes <1 min for smaller documents and simpler pipelines – the results are found in your newly created Azure Cosmos DB, where we can quickly inspect our results.
-<br/><br/>
-![](images/sample_output_call_center_mining.png.png)  
-
-## Currently Included Services
-The current release of BPA allows you to build pipelines from multiple Cognitives Services, Azure Machine Learning Endpoints, and even Hugging Face models. New Services and Features are continuously being released. Please refer to each Service's documentation for the latest reference. 
-
-### Available Services
-- Azure Cognitive Services
-  - Form Recognizer
-  - Language Service
-  - Speech Service
-  - Cognitive Search
-- Azure Machine Learning Endpoints
-- HuggingFace Tokenization Models  
-
-
-#### Form Recognizer Models  
-
-| Type | Model | Description |
-| -----| ----- | ----------- |
-| Prebuilt |Read (preview)	| Extract printed and handwritten text lines, words, locations, and detected languages. |
-| | General document (preview) |	Extract text, tables, structure, key-value pairs, and named entities.|
-| | Layout |	Extract text and layout information from documents.|  
-| | W-2 (preview) |	Extract employee, employer, wage information, etc. from US W-2 forms.|
-| |Invoice	| Extract key information from English and Spanish invoices.|
-| |Receipt	| Extract key information from English receipts.|
-| |ID document	| Extract key information from US driver licenses and international passports.|
-| |Business card	| Extract key information from English business cards.|  
-| Custom | Custom |	Extract data from forms and documents specific to your business. Custom models are trained for your distinct data and use cases. |
-| Custom | Composed |	Compose a collection of custom models and assign them to a single model built from your form types.|  
-
-[Form Recognizer Models Documentation](https://docs.microsoft.com/en-us/azure/applied-ai-services/form-recognizer/concept-model-overview)  
-  
-  
-#### Language Service Models
-
-| Type | Model | Description |
-| -----| ----- | ----------- |
-| Prebuilt |Named Entity Recognition (NER)|	This pre-configured feature identifies entities in text across several pre-defined categories.|
-| |Personally Identifiable Information (PII) detection	|This pre-configured feature identifies entities in text across several pre-defined categories of sensitive |information, such as account information.|
-| |Key phrase extraction|	This pre-configured feature evaluates unstructured text, and for each input document, returns a list of key phrases and main points in the text.|
-| |Entity linking	|This pre-configured feature disambiguates the identity of an entity found in text and provides links to the entity on Wikipedia.|
-| |Text Analytics for health|	This pre-configured feature extracts information from unstructured medical texts, such as clinical notes and doctor's notes.|
-| Custom |Custom NER|	Build an AI model to extract custom entity categories, using unstructured text that you provide.|
-| Prebuilt |Analyze sentiment and opinions|	This pre-configured feature provides sentiment labels (such as "negative", "neutral" and "positive") for sentences and documents. This feature can additionally provide granular information about the opinions related to words that appear in the text, such as the attributes of products or services.|
-| Custom |Custom text classification (preview)	|Build an AI model to classify unstructured text into custom classes that you define.|
-| Prebuilt |Text Summarization (preview)	|This pre-configured feature extracts key sentences that collectively convey the essence of a document.|
-
-[Language Service Models Documentation](https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview)  
-  
-  
-#### Speech Service
-The Speech service provides speech-to-text and text-to-speech capabilities with an Azure Speech resource. You can transcribe speech to text with high accuracy, produce natural-sounding text-to-speech voices, translate spoken audio, and use speaker recognition during conversations.  
-[Speech Service Documentation](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/overview)  
-  
-  
-#### Cognitive Search
-Cloud search over private heterogeneous content, with options for AI enrichment if your content is unstructured or unsearchable in raw form.  
-[Cognitive Search Documentation](https://docs.microsoft.com/en-us/azure/search/)  
-  
-  
-#### Hugging Face Implementation
-Many of the pretrained models from the Hugging Face library can be used, depending on the task selected! Find more information at https://huggingface.co/models?pipeline_tag=text-classification&sort=downloads
-
-![](images/hugging_face_models.png)
-*Hugging Face model repository*
 
 ---
 ## Prerequisities
@@ -312,7 +224,7 @@ Finally, paste that selection into the editor window.
  ![](images/find_static_web_app2.png)
  
  
-## Load Documents!
+## Create Pipeline
 1. Select Configure a New Pipeline  
 **Important: When naming your pipeline, please choose a length greater then 5 characters to satisfy naming requirements of various Azure Services created through the pipeline**  
 ![](images/app_landing_page.png)  
@@ -368,26 +280,6 @@ If a Cognitive Search index was added to the pipeline, you will need to navigate
 ![](images/cognitive_search_index1.png)  
 *Generated Cognitive Search Index*  
 
----
-## Further Customization
-All code for the front end React-based UI is provided for further customization (see references for designing and customizing React apps).  
-
-Generally, Services with text outputs (e.g. Azure Language Service, and many Services from Form Recognizer and Speech Service) will return a JSON response, where the key output is passed to the next stage of the pipeline for continued processing, or finally stored in a CosmosDB (see image below). Each of these intermediate outputs, will also be added to a Cognitive Search Index, if the feature is added to the end of the pipeline.  
-
-Leveraging this accelerator as part of a broader pipeline is encouraged! The AI Rangers / AI Specialist CSA teams would love to hear about future use cases. See references for more contact information.
-
-![](images/json-output.png)  
-
----
-## Contacts
-Please reach out to the AI Rangers for more info or feedback aka.ms/AIRangers
-
-## Roadmap
-| Priority | Item |
-| ------- | ------------- |
-| Impending | Adding instructions on basic UI customizations (e.g. adding header graphics, changing title, etc..) |
-| TBD | ... |
- 
 
 ## References
 | Subject | Source (Link) |
